@@ -1,6 +1,6 @@
 <div align="center">
   <h1 align="center">
-    Desafio Poder 360
+    Desafio Poder 360 - Headless WordPress Blog com Next.js e GraphQL
   </h1>
 </div>
 
@@ -32,27 +32,53 @@
 
 ### 2 - BAIXAR O PROJETO ✨
 ```bash
-git clone https://github.com/leccorside/Projeto_Poder_360.git
+git clone https://github.com/leccorside/poder360.git
 ```
 
-### 5 - RODAR BACKEND DOCKER NA PASTA RAIZ DO PROJETO ✨
+### 3 - INSTALAR MÓDULOS ✨
 ```bash
-docker-compose -f backend/docker-compose.yml up -d 
+npm install
 ```
 
-### 6 - ACESSAR BACKEND WORDPRESS E MYSQL/PHPMYADMIN ✨
-PAINEL WORDPRESS
-(http://localhost:8020/wp-admin)
-USER: root
-PASS: root
-
-PHPMYADMIN
-(http://localhost:8183)
-HOST: mysql:3306
-USER: root
-PASS: root
-
-### 7 - RODE O PROJETO ✨
+### 4 - CRIE UM ARQUIDO .ENV RODANDO ESSE COMANDO NA RAIZ DO PROJETO ✨
 ```bash
-npm run dev
+New-Item -Path . -Name ".env" -ItemType "File"
+```
+
+### 5 - COLE ESTE CONTEÚDO DENTRO DO ARQUIVO .ENV (VOCÊ PODE ALTERAR A URL PARA OUTRO SITE WORDPRESS) ✨
+# *Lembrando que o site wordpress deve estar com o plugin WPGraphQL instalado
+```bash
+WORDPRESS_URL=https://leccorside.com.br/poder360/painel
+```
+
+### 6 - ABRA O PAINEL ADMINISTRATIVO DO WORDPRESS PARA ADMINISTRAR O CONTEÚDO ✨
+URL
+```bash
+https://leccorside.com.br/poder360/painel/wp-admin
+```
+USUÁRIO
+```bash
+admin
+```
+SENHA
+```bash
+admin
+```
+
+## CASO QUEIRA INSTALAR O SITE WORDPRESS EM OUTRO SERVIDOR OU LOCALMENTE, SIGA OS PASSOS A SEGUIR:
+
+### 1 - BAIXE OS ARQUIVOS DO SITE WORDPRESS COMPLETO DENTRO DO DIRETÓRIO DO PROJETO NO GIT ✨
+```bash
+New-Item -Path . -Name ".env" -ItemType "File"
+```
+
+### 2 - SUBA OS 2 ARQUIVOS PARA DENTRO DO SEU SERVIDOR PHP E EXECUTE A URL DO SEU SITE + INSTALLER.PHP ✨
+```bash
+https://seusite.com.br/installer.php
+```
+Para logar no painel use os mesmos dados anteriores, admin, admin
+
+### 3 - LEMBRE-SE QUE CASO ESSE PASSO SEJA EXECUTADO VOCÊ DEVE ALTERAR A URL NO ARQUIVO .ENV EM SEU PROJETO PRONTEND ✨
+```bash
+WORDPRESS_URL=https://seusite.com.br
 ```
