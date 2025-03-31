@@ -47,6 +47,7 @@ New-Item -Path . -Name ".env" -ItemType "File"
 
 ### 5 - COLE ESTE CONTEÚDO DENTRO DO ARQUIVO .ENV (VOCÊ PODE ALTERAR A URL PARA OUTRO SITE WORDPRESS) ✨
 #### *Lembrando que o site wordpress deve estar com o plugin WPGraphQL instalado, e inserido imagens de destaque em cada post
+#### *Se a url do site for alterada a mesma deve ser alterado no arquivo next.config.ts
 ```bash
 WORDPRESS_URL=https://leccorside.com.br/poder360/painel
 ```
@@ -64,6 +65,12 @@ SENHA
 ```bash
 admin
 ```
+
+### 7 - O PROJETO DO FRONTEND PODE SER ACESSADO PELO VERCEL ✨
+```bash
+https://poder360.vercel.app
+```
+
 
 ## CASO QUEIRA INSTALAR O SITE WORDPRESS EM OUTRO SERVIDOR OU LOCALMENTE, SIGA OS PASSOS A SEGUIR:
 
