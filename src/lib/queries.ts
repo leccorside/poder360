@@ -6,15 +6,15 @@ const client = new GraphQLClient(`${baseUrl}/graphql`);
 
 export async function getCategories(): Promise<Category[]> {
   const query = gql`
-  query getCategories {
-    categories(first: 100) {
-      nodes {
-        id
-        name
-        slug
+    query getCategories {
+      categories(first: 100) {
+        nodes {
+          id
+          name
+          slug
+        }
       }
     }
-  }
   `;
 
   const data: { categories: { nodes: Category[] } } = await client.request(query);
@@ -46,12 +46,12 @@ export async function getAllPosts(
   ].filter(Boolean).join(', ');
 
   const whereConditions = [
-    hasSearchTerm ? 'search: $search': '',
-    hasCategoryTerm ? 'categoryName: $categorySlug': ''
+    hasSearchTerm ? 'search: $search' : '',
+    hasCategoryTerm ? 'categoryName: $categorySlug' : ''
   ].filter(Boolean);
 
   const whereClause = whereConditions.length > 0
-    ? `where: { ${whereConditions.join(', ')}}`
+    ? `where: { ${whereConditions.join(', ')} }`
     : '';
 
   const query = gql`
@@ -101,8 +101,7 @@ export async function getAllPosts(
     perPage: 6,
     ...(isPrevious
       ? { before: params.before }
-      : { after: params.after }
-    )
+      : { after: params.after })
   };
 
   if (hasSearchTerm) {
@@ -133,7 +132,7 @@ export async function getAllPosts(
   };
 }
 
-export async function getPostsBySlug(slug: string) : Promise<Post | null> {
+export async function getPostsBySlug(slug: string): Promise<Post | null> {
   const query = gql`
     query GetPostBySlug($slug: ID!) {
       post(id: $slug, idType: SLUG) {
@@ -166,6 +165,22 @@ export async function getPostsBySlug(slug: string) : Promise<Post | null> {
   `;
 
   const variables = { slug };
-  const data : { post: Post } = await client.request(query, variables);
+  const data: { post: Post } = await client.request(query, variables);
   return data.post;
+}
+
+// Função nova adicionada para buscar os slugs de todos os posts
+export async function getAllPostSlugs(): Promise<{ slug: string }[]> {
+  const query = gql`
+    query GetAllPostSlugs {
+      posts {
+        nodes {
+          slug
+        }
+      }
+    }
+  `;
+
+  const data: { posts: { nodes: { slug: string }[] } } = await client.request(query);
+  return data.posts.nodes;
 }

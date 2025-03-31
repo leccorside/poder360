@@ -1,6 +1,7 @@
 import { SearchBar } from "./search-bar";
 import { Post } from '@/lib/types';
 import Link from "next/link";
+import Image from 'next/image';
 
 type LatestPostsProps = {
   posts: Post[];
@@ -41,11 +42,14 @@ export function LatestPosts({ posts, searchTerm, pageInfo, category }: LatestPos
             <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 card-min">
               {post.featuredImage?.node?.sourceUrl && (
                 <div className="">
-                  <img
-                    src={post.featuredImage.node.sourceUrl}
-                    alt={post.title}
-                    className="w-full h-auto rounded-t-lg"
-                  />
+                  <Image 
+                        src={post.featuredImage.node.sourceUrl} 
+                        alt={post.title} 
+                        className="w-full h-auto rounded-t-lg"
+                        width={1920} // Defina a largura apropriada
+                        height={1080} // Defina a altura apropriada
+                        priority // Para carregar mais rapidamente
+                      />
                 </div>
               )}
 
