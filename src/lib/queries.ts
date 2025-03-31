@@ -98,7 +98,7 @@ export async function getAllPosts(
   }
 
   const variables: Variables = {
-    perPage: 3,
+    perPage: 6,
     ...(isPrevious
       ? { before: params.before }
       : { after: params.after }
