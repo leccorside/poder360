@@ -102,6 +102,7 @@ export function LatestPosts({ posts, searchTerm, pageInfo, category }: LatestPos
           </Link>
         ))}
       </div>
+      
 
       <div className="flex justify-between mt-2">
         <div className="paginacao">
