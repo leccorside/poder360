@@ -69,7 +69,10 @@ admin
 
 ### 1 - BAIXE OS ARQUIVOS DO SITE WORDPRESS COMPLETO DENTRO DO DIRETÓRIO DO PROJETO NO GIT ✨
 ```bash
-New-Item -Path . -Name ".env" -ItemType "File"
+backup site wordpress/20250331_poder360_598c456f01626b188008_20250331022913_archive.zip
+```
+```bash
+backup site wordpress/installer.php
 ```
 
 ### 2 - SUBA OS 2 ARQUIVOS PARA DENTRO DO SEU SERVIDOR PHP E EXECUTE A URL DO SEU SITE + INSTALLER.PHP ✨
