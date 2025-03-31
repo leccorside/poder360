@@ -4,25 +4,23 @@ import { useState, useEffect, useRef } from "react";
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const menuRef = useRef(null); // Referência ao menu mobile
+  const menuRef = useRef<HTMLDivElement | null>(null); // Tipo corrigido
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((prevState) => {
       if (!prevState) {
-        // Adiciona a classe 'overflow-hidden' ao body para evitar rolagem
-        document.body.classList.add("overflow-hidden");
+        document.body.classList.add("overflow-hidden"); // Impede rolagem
       } else {
-        // Remove a classe 'overflow-hidden' do body para permitir rolagem
         document.body.classList.remove("overflow-hidden");
       }
       return !prevState;
     });
   };
 
-  const handleClickOutside = (event) => {
-    if (menuRef.current && !menuRef.current.contains(event.target)) {
+  const handleClickOutside = (event: MouseEvent) => {
+    if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
       setIsMobileMenuOpen(false);
-      document.body.classList.remove("overflow-hidden"); // Garante que a rolagem seja liberada
+      document.body.classList.remove("overflow-hidden"); // Libera rolagem
     }
   };
 
@@ -30,8 +28,7 @@ export function Header() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
-      // Limpa o estado do body ao desmontar o componente
-      document.body.classList.remove("overflow-hidden");
+      document.body.classList.remove("overflow-hidden"); // Limpa classe no desmontar
     };
   }, []);
 
@@ -75,7 +72,7 @@ export function Header() {
 
           {/* Mobile Menu */}
           <div
-            ref={menuRef}
+            ref={menuRef} // Tipo atualizado aqui
             className={`fixed menulat min-h-screen w-64 bg-slate-100 shadow-lg transform transition-transform duration-300 ease-in-out ${
               isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
             } lg:hidden z-50`}
@@ -116,7 +113,7 @@ export function Header() {
                     href={item.href}
                     onClick={() => {
                       toggleMobileMenu();
-                      document.body.classList.remove("overflow-hidden"); // Libera a rolagem
+                      document.body.classList.remove("overflow-hidden");
                     }}
                     className="flex items-center"
                   >
