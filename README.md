@@ -46,7 +46,7 @@ New-Item -Path . -Name ".env" -ItemType "File"
 ```
 
 ### 5 - COLE ESTE CONTEÚDO DENTRO DO ARQUIVO .ENV (VOCÊ PODE ALTERAR A URL PARA OUTRO SITE WORDPRESS) ✨
-# *Lembrando que o site wordpress deve estar com o plugin WPGraphQL instalado
+#### *Lembrando que o site wordpress deve estar com o plugin WPGraphQL instalado
 ```bash
 WORDPRESS_URL=https://leccorside.com.br/poder360/painel
 ```
