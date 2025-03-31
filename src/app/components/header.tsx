@@ -1,12 +1,39 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const menuRef = useRef(null); // Referência ao menu mobile
+
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
+    setIsMobileMenuOpen((prevState) => {
+      if (!prevState) {
+        // Adiciona a classe 'overflow-hidden' ao body para evitar rolagem
+        document.body.classList.add("overflow-hidden");
+      } else {
+        // Remove a classe 'overflow-hidden' do body para permitir rolagem
+        document.body.classList.remove("overflow-hidden");
+      }
+      return !prevState;
+    });
   };
+
+  const handleClickOutside = (event) => {
+    if (menuRef.current && !menuRef.current.contains(event.target)) {
+      setIsMobileMenuOpen(false);
+      document.body.classList.remove("overflow-hidden"); // Garante que a rolagem seja liberada
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      // Limpa o estado do body ao desmontar o componente
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, []);
 
   const navItems = [
     { name: "Home", href: "/" },
@@ -48,7 +75,8 @@ export function Header() {
 
           {/* Mobile Menu */}
           <div
-            className={`fixed top-0 menulat min-h-screen w-64 bg-slate-100 shadow-lg transform transition-transform duration-300 ease-in-out ${
+            ref={menuRef}
+            className={`fixed menulat min-h-screen w-64 bg-slate-100 shadow-lg transform transition-transform duration-300 ease-in-out ${
               isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
             } lg:hidden z-50`}
           >
@@ -86,7 +114,10 @@ export function Header() {
                 >
                   <Link
                     href={item.href}
-                    onClick={toggleMobileMenu} // Fecha o menu ao clicar no link
+                    onClick={() => {
+                      toggleMobileMenu();
+                      document.body.classList.remove("overflow-hidden"); // Libera a rolagem
+                    }}
                     className="flex items-center"
                   >
                     {item.name}
