@@ -59,12 +59,13 @@ export default async function Page({ params} : {
         </div>
 
         <div className='autor-data'>
-            {post.categories.nodes.map((category, index) => (
-                <span key={category.id} className='cat-name-single'>
-                  {category.name}
-                  {index < post.categories.nodes.length - 1 && ", "} {/* Separando categorias com vírgula */}
-                </span>
-            ))}
+        {Array.isArray(post.categories?.nodes) &&
+          post.categories.nodes.map((category, index) => (
+            <span key={category.id} className="cat-name-single">
+              {category.name}
+              {index < post.categories.nodes.length - 1 && ", "}
+            </span>
+        ))}
 
             Publicado em {date} por <b>{post?.author?.node?.name}</b>
         </div>

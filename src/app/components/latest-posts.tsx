@@ -51,12 +51,13 @@ export function LatestPosts({ posts, searchTerm, pageInfo, category }: LatestPos
 
               {/* Exibindo a categoria */}
               <div className="text-gray-600 cat-min">
-                  {post.categories.nodes.map((category, index) => (
-                    <span key={category.id}>
-                      {category.name}
-                      {index < post.categories.nodes.length - 1 && ", "} {/* Separando categorias com vírgula */}
-                    </span>
-                  ))}
+              {Array.isArray(post.categories?.nodes) &&
+                post.categories.nodes.map((category, index) => (
+                  <span key={category.id} className="cat-name-single">
+                    {category.name}
+                    {index < post.categories.nodes.length - 1 && ", "}
+                  </span>
+              ))}
               </div>
 
               <div className="p-5">
