@@ -13,6 +13,7 @@
     "@heroui/card": "^2.2.15",
     "@heroui/system": "^2.4.12",
     "@heroui/theme": "^2.4.12",
+    "flowbite": "^3.1.2",
     "framer-motion": "^12.6.2",
     "graphql": "^16.10.0",
     "graphql-request": "^7.1.2",

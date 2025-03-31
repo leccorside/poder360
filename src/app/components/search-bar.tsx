@@ -7,7 +7,7 @@ export function SearchBar(){
   function handleSearch(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const searchInput = event.currentTarget.elements.namedItem("search") as HTMLInputElement;
-    rounter.push(`/blog?search=${searchInput.value}`);
+    rounter.push(`/?search=${searchInput.value}`);
   }
 
   return (
